@@ -111,7 +111,7 @@ footer a{color:#fff;text-decoration:underline}
 
 <footer id="contact">
   <b>নাঙ্গলকোট প্রতিদিন</b><br>
-  ইমেইল: আপনার@ইমেইল.com | ফোন: ০১XXXXXXXXX<br>
+  ইমেইল: Nangolkotbd@gmail.com | ফোন: ০১XXXXXXXXX<br>
   <a href="https://facebook.com/">ফেসবুক পেজ</a><br>
   © ২০২৬ সর্বস্বত্ব সংরক্ষিত
 </footer>
