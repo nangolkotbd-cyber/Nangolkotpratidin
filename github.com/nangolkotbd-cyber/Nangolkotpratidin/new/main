@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>নাঙ্গলকোট প্রতিদিন</title>
+  <link>https://nangolkotbd-cyber.github.io/Nangolkotpratidin/</link>
+  <description>নাঙ্গলকোটের প্রতিদিনের খবর</description>
+  <language>bn</language>
+  <item>
+    <title>এখানে খবরের হেডলাইন</title>
+    <link>https://nangolkotbd-cyber.github.io/Nangolkotpratidin/#n1</link>
+    <guid>https://nangolkotbd-cyber.github.io/Nangolkotpratidin/#n1</guid>
+    <description>খবরের সংক্ষিপ্ত বিবরণ</description>
+    <pubDate>Wed, 04 Nov 2026 10:00:00 +0600</pubDate>
+  </item>
+</channel>
+</rss>
