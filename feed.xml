@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+  <title>নাঙ্গলকোট প্রতিদিন</title>
+  <link>https://nangolkotbd-cyber.github.io/Nangolkotpratidin/</link>
+  <description>নাঙ্গলকোটের প্রতিদিনের খবর</description>
+  <language>bn</language>
+
+  <item>
+    <title>এখানে আজকের প্রধান শিরোনাম লিখুন</title>
+    <link>https://nangolkotbd-cyber.github.io/Nangolkotpratidin/?n=n1</link>
+    <guid>n1</guid>
+    <category>স্থানীয়</category>
+    <description>খবরের সংক্ষিপ্ত বিবরণ এখানে লিখুন।</description>
+    <content:encoded><![CDATA[এখানে পুরো খবর লিখুন।
+
+নতুন অনুচ্ছেদের জন্য একটি ফাঁকা লাইন রাখুন।]]></content:encoded>
+    <pubDate>Wed, 04 Nov 2026 10:00:00 +0600</pubDate>
+  </item>
+
+  <item>
+    <title>নাঙ্গলকোটের স্কুলে বার্ষিক ক্রীড়া প্রতিযোগিতা</title>
+    <link>https://nangolkotbd-cyber.github.io/Nangolkotpratidin/?n=n2</link>
+    <guid>n2</guid>
+    <category>শিক্ষা</category>
+    <description>শিক্ষার্থীদের অংশগ্রহণে অনুষ্ঠিত হয়েছে প্রতিযোগিতা।</description>
+    <content:encoded><![CDATA[এখানে বিস্তারিত লিখুন।]]></content:encoded>
+    <pubDate>Wed, 04 Nov 2026 09:00:00 +0600</pubDate>
+  </item>
+
+  <item>
+    <title>স্থানীয় মাঠে প্রীতি ফুটবল ম্যাচ</title>
+    <link>https://nangolkotbd-cyber.github.io/Nangolkotpratidin/?n=n3</link>
+    <guid>n3</guid>
+    <category>খেলা</category>
+    <description>দুই দলের লড়াইয়ে দর্শকের ভিড়।</description>
+    <content:encoded><![CDATA[এখানে বিস্তারিত লিখুন।]]></content:encoded>
+    <pubDate>Tue, 03 Nov 2026 17:00:00 +0600</pubDate>
+  </item>
+
+</channel>
+</rss>
