@@ -4,27 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>নাঙ্গলকোট প্রতিদিন</title>
-<meta name="description" content="নাঙ্গলকোটের প্রতিদিনের খবর">
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="নাঙ্গলকোট প্রতিদিন" href="feed.xml">
 <style>
-:root{--ink:#1b1f1c;--mute:#5d665f;--line:#dcdfd8;--paper:#fbfaf6;--card:#fff;--green:#0b5d3b;--red:#c8321e}
+:root{--ink:#1b1f1c;--mute:#5d665f;--line:#dcdfd8;--paper:#fbfaf6;--green:#0b5d3b;--red:#c8321e}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Hind Siliguri",sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
+body{font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
 a{color:inherit;text-decoration:none}
-h1,h2,h3{font-family:"Noto Serif Bengali",serif;line-height:1.45}
+h1,h2,h3{line-height:1.45}
 .bar{background:var(--green);color:#e8f2ec;font-size:13px;padding:6px 14px;display:flex;justify-content:space-between}
 header{text-align:center;padding:18px 12px 10px}
 header h1{font-size:clamp(30px,7vw,48px);color:var(--green)}
 header p{color:var(--mute);font-size:14px}
-nav{position:sticky;top:0;z-index:10;background:var(--paper);border-top:1px solid var(--line);border-bottom:2px solid var(--green);display:flex;overflow-x:auto;white-space:nowrap;justify-content:center}
+nav{position:sticky;top:0;z-index:10;background:var(--paper);border-top:1px solid var(--line);border-bottom:2px solid var(--green);display:flex;overflow-x:auto;white-space:nowrap}
 nav a{padding:11px 16px;font-weight:500}
-nav a:hover,nav a.on{color:var(--red)}
-.ticker{display:flex;align-items:center;background:var(--card);border-bottom:1px solid var(--line);overflow:hidden}
+nav a.on{color:var(--red)}
+.ticker{display:flex;align-items:center;background:#fff;border-bottom:1px solid var(--line);overflow:hidden}
 .ticker b{background:var(--red);color:#fff;padding:7px 14px;white-space:nowrap}
 .ticker div{white-space:nowrap;padding-left:100%;animation:run 40s linear infinite;font-size:15px}
-.ticker:hover div{animation-play-state:paused}
 @keyframes run{to{transform:translateX(-100%)}}
-@media(prefers-reduced-motion:reduce){.ticker div{animation:none;padding-left:12px;overflow-x:auto}}
 .page{max-width:1080px;margin:0 auto;padding:16px 12px}
 .top{display:grid;gap:18px}
 @media(min-width:820px){.top{grid-template-columns:1.7fr 1fr}}
@@ -37,9 +34,6 @@ nav a:hover,nav a.on{color:var(--red)}
 .latest{border-left:3px solid var(--green);padding-left:14px}
 .latest h3{font-size:19px;margin-bottom:6px}
 .latest li{list-style:none;padding:10px 0;border-bottom:1px solid var(--line)}
-.latest li:last-child{border:0}
-.latest a{font-weight:500}
-.latest a:hover,.card h3:hover{color:var(--red)}
 .sec{margin-top:30px}
 .sec>h2{font-size:22px;color:var(--green);border-bottom:2px solid var(--green);padding-bottom:4px;margin-bottom:14px}
 .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
@@ -51,8 +45,8 @@ dialog::backdrop{background:#000a}
 dialog .in{padding:18px}
 dialog h2{font-size:26px;margin:6px 0}
 dialog p{margin-top:12px;font-size:17px;white-space:pre-line}
-dialog button{margin-top:18px;background:var(--green);color:#fff;border:0;padding:9px 20px;font:inherit;border-radius:4px;cursor:pointer}
-button:focus-visible,a:focus-visible,.card:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+dialog button{margin:18px 8px 0 0;background:var(--green);color:#fff;border:0;padding:9px 20px;font:inherit;border-radius:4px;cursor:pointer}
+dialog button.alt{background:#fff;color:var(--green);border:1px solid var(--green)}
 footer{background:var(--ink);color:#c9cfca;margin-top:40px;padding:24px 14px;text-align:center;font-size:14px}
 footer a{color:#fff;text-decoration:underline}
 </style>
@@ -65,12 +59,12 @@ footer a{color:#fff;text-decoration:underline}
   <p>আপনার এলাকার প্রতিদিনের খবর</p>
 </header>
 <nav id="nav"></nav>
-<div class="ticker"><b>ব্রেকিং</b><div id="ticker"></div></div>
+<div class="ticker"><b>সর্বশেষ</b><div id="ticker">খবর লোড হচ্ছে...</div></div>
 
 <main class="page">
   <section class="top">
     <article class="lead card" id="lead" tabindex="0"></article>
-    <aside class="latest"><h3>সর্বশেষ</h3><ul id="latest"></ul></aside>
+    <aside class="latest"><h3>আরও খবর</h3><ul id="latest"></ul></aside>
   </section>
   <div id="sections"></div>
 </main>
@@ -79,55 +73,40 @@ footer a{color:#fff;text-decoration:underline}
   <b>নাঙ্গলকোট প্রতিদিন</b><br>
   সম্পাদক ও প্রকাশক: আপনার নাম<br>
   ইমেইল: your@email.com | ফোন: ০১XXXXXXXXX<br>
-  <a href="https://facebook.com/" target="_blank" rel="noopener">ফেসবুক পেজ</a><br>
+  <a href="https://facebook.com/" target="_blank" rel="noopener">ফেসবুক পেজ</a> |
+  <a href="feed.xml">RSS ফিড</a><br>
   © ২০২৬ নাঙ্গলকোট প্রতিদিন। সর্বস্বত্ব সংরক্ষিত।
 </footer>
 
 <dialog id="dlg"><div class="in" id="dlgBody"></div></dialog>
 
 <script>
-/* ===== নতুন খবর যোগ করতে শুধু এই তালিকায় একটি { ... } যোগ করুন =====
-   cat: ক্যাটাগরি | img: ছবির ফাইলের নাম (না থাকলে খালি রাখুন) | date: তারিখ
-   সবচেয়ে ওপরের খবরটি "প্রধান খবর" হিসেবে দেখাবে */
 const SITE_CATS = ["স্থানীয়","রাজনীতি","শিক্ষা","খেলা","অপরাধ","কৃষি"];
-const BREAKING = [
-  "এখানে জরুরি খবর লিখুন",
-  "দ্বিতীয় জরুরি খবর এখানে",
-  "তৃতীয় জরুরি খবর এখানে"
-];
-const NEWS = [
-  { title:"এখানে আজকের প্রধান শিরোনাম লিখুন", cat:"স্থানীয়", img:"", date:"৪ নভেম্বর ২০২৬",
-    summary:"খবরের সংক্ষিপ্ত বিবরণ এখানে লিখুন।",
-    body:"এখানে পুরো খবরটি লিখুন।\n\nনতুন অনুচ্ছেদের জন্য একটি ফাঁকা লাইন রাখুন।" },
-  { title:"নাঙ্গলকোটের স্কুলে বার্ষিক ক্রীড়া প্রতিযোগিতা", cat:"শিক্ষা", img:"", date:"৪ নভেম্বর ২০২৬",
-    summary:"শিক্ষার্থীদের অংশগ্রহণে অনুষ্ঠিত হয়েছে প্রতিযোগিতা।", body:"এখানে বিস্তারিত লিখুন।" },
-  { title:"স্থানীয় মাঠে প্রীতি ফুটবল ম্যাচ", cat:"খেলা", img:"", date:"৩ নভেম্বর ২০২৬",
-    summary:"দুই দলের লড়াইয়ে দর্শকের ভিড়।", body:"এখানে বিস্তারিত লিখুন।" },
-  { title:"ইউনিয়ন পরিষদে উন্নয়ন কাজের সভা", cat:"রাজনীতি", img:"", date:"৩ নভেম্বর ২০২৬",
-    summary:"সড়ক ও নালা সংস্কার নিয়ে আলোচনা।", body:"এখানে বিস্তারিত লিখুন।" },
-  { title:"আমন ধানের ফলন নিয়ে কৃষকদের আশা", cat:"কৃষি", img:"", date:"২ নভেম্বর ২০২৬",
-    summary:"এ বছর ভালো ফলনের সম্ভাবনা।", body:"এখানে বিস্তারিত লিখুন।" },
-  { title:"স্থানীয় বাজারে নিত্যপণ্যের দাম", cat:"স্থানীয়", img:"", date:"২ নভেম্বর ২০২৬",
-    summary:"সপ্তাহজুড়ে বাজার পরিস্থিতির সারসংক্ষেপ।", body:"এখানে বিস্তারিত লিখুন।" }
-];
-
 const $ = id => document.getElementById(id);
-const pic = n => `<div class="pic">${n.img ? `<img src="${n.img}" alt="${n.title}">` : "ছবি যুক্ত হবে"}</div>`;
-let view = "সব";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let NEWS = [], view = "সব";
 
+const fmt = d => isNaN(d) ? "" : d.toLocaleDateString("bn-BD",{day:"numeric",month:"long",year:"numeric"});
 $("date").textContent = new Date().toLocaleDateString("bn-BD",{day:"numeric",month:"long",year:"numeric",weekday:"long"});
-$("ticker").textContent = BREAKING.join("   •   ");
 
-function openNews(i){
-  const n = NEWS[i];
-  $("dlgBody").innerHTML = `${pic(n)}<span class="cat">${n.cat}</span><h2>${n.title}</h2><div class="meta">${n.date}</div><p>${n.body}</p><button onclick="dlg.close()">বন্ধ করুন</button>`;
+const pic = n => `<div class="pic">${n.img ? `<img src="${esc(n.img)}" alt="${esc(n.title)}">` : "ছবি যুক্ত হবে"}</div>`;
+
+function openNews(i, push = true){
+  const n = NEWS[i]; if (!n) return;
+  $("dlgBody").innerHTML = `${pic(n)}<span class="cat">${esc(n.cat)}</span><h2>${esc(n.title)}</h2><div class="meta">${fmt(n.ts)}</div><p>${esc(n.body)}</p><button onclick="shareNews(${i})">লিংক কপি করুন</button><button class="alt" onclick="$('dlg').close()">বন্ধ করুন</button>`;
+  if (push) history.replaceState(null, "", "?n=" + encodeURIComponent(n.id));
   $("dlg").showModal();
 }
+function shareNews(i){
+  const url = location.origin + location.pathname + "?n=" + encodeURIComponent(NEWS[i].id);
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => alert("লিংক কপি হয়েছে"), () => prompt("লিংক কপি করুন:", url));
+}
+$("dlg").addEventListener("close", () => history.replaceState(null, "", location.pathname));
 $("dlg").addEventListener("click", e => { if (e.target === $("dlg")) $("dlg").close(); });
 
 function card(n){
   const i = NEWS.indexOf(n);
-  return `<article class="card" tabindex="0" onclick="openNews(${i})" onkeydown="if(event.key==='Enter')openNews(${i})">${pic(n)}<span class="cat">${n.cat}</span><h3>${n.title}</h3><div class="meta">${n.date}</div></article>`;
+  return `<article class="card" tabindex="0" onclick="openNews(${i})" onkeydown="if(event.key==='Enter')openNews(${i})">${pic(n)}<span class="cat">${esc(n.cat)}</span><h3>${esc(n.title)}</h3><div class="meta">${fmt(n.ts)}</div></article>`;
 }
 
 function render(){
@@ -138,17 +117,30 @@ function render(){
     const i = NEWS.indexOf(lead);
     $("lead").onclick = () => openNews(i);
     $("lead").onkeydown = e => { if (e.key === "Enter") openNews(i); };
-    $("lead").innerHTML = `${pic(lead)}<h2>${lead.title}</h2><p>${lead.summary}</p><div class="meta">${lead.cat} | ${lead.date}</div>`;
+    $("lead").innerHTML = `${pic(lead)}<h2>${esc(lead.title)}</h2><p>${esc(lead.summary)}</p><div class="meta">${esc(lead.cat)} | ${fmt(lead.ts)}</div>`;
   }
-  $("latest").innerHTML = list.slice(0,6).map(n => `<li><a href="#" onclick="openNews(${NEWS.indexOf(n)});return false">${n.title}</a><div class="meta">${n.date}</div></li>`).join("");
+  $("latest").innerHTML = list.slice(1,7).map(n => `<li><a href="?n=${encodeURIComponent(n.id)}" onclick="openNews(${NEWS.indexOf(n)});return false">${esc(n.title)}</a><div class="meta">${fmt(n.ts)}</div></li>`).join("");
   const cats = view === "সব" ? SITE_CATS : [view];
   $("sections").innerHTML = cats.map(c => {
     const items = NEWS.filter(n => n.cat === c && n !== lead);
-    return items.length ? `<section class="sec" id="c-${c}"><h2>${c}</h2><div class="grid">${items.map(card).join("")}</div></section>` : "";
+    return items.length ? `<section class="sec"><h2>${c}</h2><div class="grid">${items.map(card).join("")}</div></section>` : "";
   }).join("") || `<p class="empty sec">এই বিভাগে এখনো কোনো খবর নেই।</p>`;
   $("nav").innerHTML = ["সব",...SITE_CATS].map(c => `<a href="#" class="${c===view?"on":""}" onclick="view='${c}';render();window.scrollTo(0,0);return false">${c==="সব"?"প্রধান পাতা":c}</a>`).join("");
 }
-render();
+
+fetch("feed.xml?" + Date.now(), {cache:"no-store"}).then(r => r.text()).then(t => {
+  const x = new DOMParser().parseFromString(t, "application/xml");
+  NEWS = [...x.querySelectorAll("item")].map(it => {
+    const g = n => { const e = it.getElementsByTagName(n)[0]; return e ? e.textContent.trim() : ""; };
+    const en = it.getElementsByTagName("enclosure")[0];
+    return { id:g("guid"), title:g("title"), cat:g("category"), summary:g("description"),
+             body:g("content:encoded") || g("description"), img:en ? en.getAttribute("url") : "", ts:new Date(g("pubDate")) };
+  }).sort((a,b) => b.ts - a.ts);
+  $("ticker").textContent = NEWS.slice(0,5).map(n => n.title).join("   •   ");
+  render();
+  const want = new URLSearchParams(location.search).get("n");
+  if (want){ const i = NEWS.findIndex(n => n.id === want); if (i >= 0) openNews(i, false); }
+}).catch(() => { $("ticker").textContent = "খবর লোড করা যায়নি। পেজ রিফ্রেশ করুন।"; render(); });
 </script>
 </body>
 </html>
