@@ -4,47 +4,151 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>নাঙ্গলকোট প্রতিদিন</title>
+<meta name="description" content="নাঙ্গলকোটের প্রতিদিনের খবর">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:"Noto Sans Bengali",sans-serif;background:#f4f4f4;color:#222}
-  header{background:#b71c1c;color:#fff;text-align:center;padding:16px}
-  header h1{font-size:28px}
-  header p{font-size:13px;opacity:.9}
-  nav{background:#222;display:flex;overflow-x:auto;white-space:nowrap}
-  nav a{color:#fff;text-decoration:none;padding:12px 16px;font-size:15px}
-  nav a:hover{background:#b71c1c}
-  main{max-width:900px;margin:auto;padding:12px}
-  .lead{background:#fff;border-left:5px solid #b71c1c;padding:16px;margin-bottom:14px}
-  .lead h2{font-size:24px;margin-bottom:8px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-  .card{background:#fff;padding:14px;border-radius:6px;box-shadow:0 1px 3px #0002}
-  .tag{display:inline-block;background:#b71c1c;color:#fff;font-size:12px;padding:2px 8px;border-radius:3px;margin-bottom:6px}
-  .card h3{font-size:18px;margin-bottom:6px}
-  .card p,.lead p{font-size:14px;color:#555;line-height:1.6}
-  .time{font-size:12px;color:#888;margin-top:8px}
-  footer{background:#222;color:#ccc;text-align:center;padding:16px;margin-top:20px;font-size:13px}
+:root{--ink:#1b1f1c;--mute:#5d665f;--line:#dcdfd8;--paper:#fbfaf6;--card:#fff;--green:#0b5d3b;--red:#c8321e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Hind Siliguri",sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:"Noto Serif Bengali",serif;line-height:1.45}
+.bar{background:var(--green);color:#e8f2ec;font-size:13px;padding:6px 14px;display:flex;justify-content:space-between}
+header{text-align:center;padding:18px 12px 10px}
+header h1{font-size:clamp(30px,7vw,48px);color:var(--green)}
+header p{color:var(--mute);font-size:14px}
+nav{position:sticky;top:0;z-index:10;background:var(--paper);border-top:1px solid var(--line);border-bottom:2px solid var(--green);display:flex;overflow-x:auto;white-space:nowrap;justify-content:center}
+nav a{padding:11px 16px;font-weight:500}
+nav a:hover,nav a.on{color:var(--red)}
+.ticker{display:flex;align-items:center;background:var(--card);border-bottom:1px solid var(--line);overflow:hidden}
+.ticker b{background:var(--red);color:#fff;padding:7px 14px;white-space:nowrap}
+.ticker div{white-space:nowrap;padding-left:100%;animation:run 40s linear infinite;font-size:15px}
+.ticker:hover div{animation-play-state:paused}
+@keyframes run{to{transform:translateX(-100%)}}
+@media(prefers-reduced-motion:reduce){.ticker div{animation:none;padding-left:12px;overflow-x:auto}}
+.page{max-width:1080px;margin:0 auto;padding:16px 12px}
+.top{display:grid;gap:18px}
+@media(min-width:820px){.top{grid-template-columns:1.7fr 1fr}}
+.pic{background:linear-gradient(135deg,#0b5d3b,#3a7d5c 55%,#c8321e);aspect-ratio:16/9;display:grid;place-items:center;color:#ffffffcc;font-size:14px;overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:cover}
+.lead h2{font-size:clamp(24px,5vw,34px);margin:10px 0 6px}
+.lead p{color:var(--mute)}
+.cat{color:var(--red);font-weight:600;font-size:14px}
+.meta{color:var(--mute);font-size:13px}
+.latest{border-left:3px solid var(--green);padding-left:14px}
+.latest h3{font-size:19px;margin-bottom:6px}
+.latest li{list-style:none;padding:10px 0;border-bottom:1px solid var(--line)}
+.latest li:last-child{border:0}
+.latest a{font-weight:500}
+.latest a:hover,.card h3:hover{color:var(--red)}
+.sec{margin-top:30px}
+.sec>h2{font-size:22px;color:var(--green);border-bottom:2px solid var(--green);padding-bottom:4px;margin-bottom:14px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.card{cursor:pointer}
+.card h3{font-size:17px;margin:8px 0 2px}
+.empty{color:var(--mute)}
+dialog{border:0;border-radius:6px;max-width:680px;width:calc(100% - 24px);margin:auto;padding:0;max-height:90vh;overflow:auto}
+dialog::backdrop{background:#000a}
+dialog .in{padding:18px}
+dialog h2{font-size:26px;margin:6px 0}
+dialog p{margin-top:12px;font-size:17px;white-space:pre-line}
+dialog button{margin-top:18px;background:var(--green);color:#fff;border:0;padding:9px 20px;font:inherit;border-radius:4px;cursor:pointer}
+button:focus-visible,a:focus-visible,.card:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+footer{background:var(--ink);color:#c9cfca;margin-top:40px;padding:24px 14px;text-align:center;font-size:14px}
+footer a{color:#fff;text-decoration:underline}
 </style>
 </head>
 <body>
 
+<div class="bar"><span>নাঙ্গলকোট, কুমিল্লা</span><span id="date"></span></div>
 <header>
   <h1>নাঙ্গলকোট প্রতিদিন</h1>
   <p>আপনার এলাকার প্রতিদিনের খবর</p>
 </header>
+<nav id="nav"></nav>
+<div class="ticker"><b>ব্রেকিং</b><div id="ticker"></div></div>
 
-<nav>
-  <a href="#">প্রধান পাতা</a>
-  <a href="#">স্থানীয়</a>
-  <a href="#">রাজনীতি</a>
-  <a href="#">শিক্ষা</a>
-  <a href="#">খেলা</a>
-  <a href="#">অপরাধ</a>
-  <a href="#">যোগাযোগ</a>
-</nav>
+<main class="page">
+  <section class="top">
+    <article class="lead card" id="lead" tabindex="0"></article>
+    <aside class="latest"><h3>সর্বশেষ</h3><ul id="latest"></ul></aside>
+  </section>
+  <div id="sections"></div>
+</main>
 
-<main>
-  <section class="lead">
-    <span class="tag">প্রধান খবর</span>
-    <h2>এখানে আজকের প্রধান শিরোনাম লিখুন</h2>
-    <p>এখানে সংবাদের সংক্ষিপ্ত বিবরণ লিখুন। প্রতিবেদনের মূল তথ্য এখানে থাকবে।</p>
-    <div class="time">৩ নভেম্বর ২০২৬</d
+<footer>
+  <b>নাঙ্গলকোট প্রতিদিন</b><br>
+  সম্পাদক ও প্রকাশক: আপনার নাম<br>
+  ইমেইল: your@email.com | ফোন: ০১XXXXXXXXX<br>
+  <a href="https://facebook.com/" target="_blank" rel="noopener">ফেসবুক পেজ</a><br>
+  © ২০২৬ নাঙ্গলকোট প্রতিদিন। সর্বস্বত্ব সংরক্ষিত।
+</footer>
+
+<dialog id="dlg"><div class="in" id="dlgBody"></div></dialog>
+
+<script>
+/* ===== নতুন খবর যোগ করতে শুধু এই তালিকায় একটি { ... } যোগ করুন =====
+   cat: ক্যাটাগরি | img: ছবির ফাইলের নাম (না থাকলে খালি রাখুন) | date: তারিখ
+   সবচেয়ে ওপরের খবরটি "প্রধান খবর" হিসেবে দেখাবে */
+const SITE_CATS = ["স্থানীয়","রাজনীতি","শিক্ষা","খেলা","অপরাধ","কৃষি"];
+const BREAKING = [
+  "এখানে জরুরি খবর লিখুন",
+  "দ্বিতীয় জরুরি খবর এখানে",
+  "তৃতীয় জরুরি খবর এখানে"
+];
+const NEWS = [
+  { title:"এখানে আজকের প্রধান শিরোনাম লিখুন", cat:"স্থানীয়", img:"", date:"৪ নভেম্বর ২০২৬",
+    summary:"খবরের সংক্ষিপ্ত বিবরণ এখানে লিখুন।",
+    body:"এখানে পুরো খবরটি লিখুন।\n\nনতুন অনুচ্ছেদের জন্য একটি ফাঁকা লাইন রাখুন।" },
+  { title:"নাঙ্গলকোটের স্কুলে বার্ষিক ক্রীড়া প্রতিযোগিতা", cat:"শিক্ষা", img:"", date:"৪ নভেম্বর ২০২৬",
+    summary:"শিক্ষার্থীদের অংশগ্রহণে অনুষ্ঠিত হয়েছে প্রতিযোগিতা।", body:"এখানে বিস্তারিত লিখুন।" },
+  { title:"স্থানীয় মাঠে প্রীতি ফুটবল ম্যাচ", cat:"খেলা", img:"", date:"৩ নভেম্বর ২০২৬",
+    summary:"দুই দলের লড়াইয়ে দর্শকের ভিড়।", body:"এখানে বিস্তারিত লিখুন।" },
+  { title:"ইউনিয়ন পরিষদে উন্নয়ন কাজের সভা", cat:"রাজনীতি", img:"", date:"৩ নভেম্বর ২০২৬",
+    summary:"সড়ক ও নালা সংস্কার নিয়ে আলোচনা।", body:"এখানে বিস্তারিত লিখুন।" },
+  { title:"আমন ধানের ফলন নিয়ে কৃষকদের আশা", cat:"কৃষি", img:"", date:"২ নভেম্বর ২০২৬",
+    summary:"এ বছর ভালো ফলনের সম্ভাবনা।", body:"এখানে বিস্তারিত লিখুন।" },
+  { title:"স্থানীয় বাজারে নিত্যপণ্যের দাম", cat:"স্থানীয়", img:"", date:"২ নভেম্বর ২০২৬",
+    summary:"সপ্তাহজুড়ে বাজার পরিস্থিতির সারসংক্ষেপ।", body:"এখানে বিস্তারিত লিখুন।" }
+];
+
+const $ = id => document.getElementById(id);
+const pic = n => `<div class="pic">${n.img ? `<img src="${n.img}" alt="${n.title}">` : "ছবি যুক্ত হবে"}</div>`;
+let view = "সব";
+
+$("date").textContent = new Date().toLocaleDateString("bn-BD",{day:"numeric",month:"long",year:"numeric",weekday:"long"});
+$("ticker").textContent = BREAKING.join("   •   ");
+
+function openNews(i){
+  const n = NEWS[i];
+  $("dlgBody").innerHTML = `${pic(n)}<span class="cat">${n.cat}</span><h2>${n.title}</h2><div class="meta">${n.date}</div><p>${n.body}</p><button onclick="dlg.close()">বন্ধ করুন</button>`;
+  $("dlg").showModal();
+}
+$("dlg").addEventListener("click", e => { if (e.target === $("dlg")) $("dlg").close(); });
+
+function card(n){
+  const i = NEWS.indexOf(n);
+  return `<article class="card" tabindex="0" onclick="openNews(${i})" onkeydown="if(event.key==='Enter')openNews(${i})">${pic(n)}<span class="cat">${n.cat}</span><h3>${n.title}</h3><div class="meta">${n.date}</div></article>`;
+}
+
+function render(){
+  const list = view === "সব" ? NEWS : NEWS.filter(n => n.cat === view);
+  const lead = list[0];
+  $("lead").style.display = lead ? "" : "none";
+  if (lead){
+    const i = NEWS.indexOf(lead);
+    $("lead").onclick = () => openNews(i);
+    $("lead").onkeydown = e => { if (e.key === "Enter") openNews(i); };
+    $("lead").innerHTML = `${pic(lead)}<h2>${lead.title}</h2><p>${lead.summary}</p><div class="meta">${lead.cat} | ${lead.date}</div>`;
+  }
+  $("latest").innerHTML = list.slice(0,6).map(n => `<li><a href="#" onclick="openNews(${NEWS.indexOf(n)});return false">${n.title}</a><div class="meta">${n.date}</div></li>`).join("");
+  const cats = view === "সব" ? SITE_CATS : [view];
+  $("sections").innerHTML = cats.map(c => {
+    const items = NEWS.filter(n => n.cat === c && n !== lead);
+    return items.length ? `<section class="sec" id="c-${c}"><h2>${c}</h2><div class="grid">${items.map(card).join("")}</div></section>` : "";
+  }).join("") || `<p class="empty sec">এই বিভাগে এখনো কোনো খবর নেই।</p>`;
+  $("nav").innerHTML = ["সব",...SITE_CATS].map(c => `<a href="#" class="${c===view?"on":""}" onclick="view='${c}';render();window.scrollTo(0,0);return false">${c==="সব"?"প্রধান পাতা":c}</a>`).join("");
+}
+render();
+</script>
+</body>
+</html>
